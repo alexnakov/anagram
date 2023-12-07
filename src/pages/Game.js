@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import BoardSVG from '../components/BoardSVG.js'
 import { motion, spring } from 'framer-motion'
 
 
@@ -89,11 +90,12 @@ export default function Game() {
   
   return (
     <div onClick={e => moveBoxes(e)} style={{width: '100vw', height: '100vh', display: 'grid', placeItems: 'center'}}>
-      <div style={{border: '1px solid red', width: '500px', height: '300px', position: 'relative'}}>
-        <motion.div className='box' layout transition={spring} style={box1Pos}></motion.div>
+      <div style={{border: '1px solid red', width: '150px', height: '150px', position: 'relative'}}>
+        <BoardSVG />
+        {/* <motion.div className='box' layout transition={spring} style={box1Pos}></motion.div>
         <motion.div className='box' layout transition={spring} style={box2Pos}></motion.div>
         <motion.div className='box' layout transition={spring} style={box3Pos}></motion.div>
-        <motion.div className='box' layout transition={spring} style={box4Pos}></motion.div>
+        <motion.div className='box' layout transition={spring} style={box4Pos}></motion.div> */}
       </div>
     </div>
   )
