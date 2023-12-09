@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion, spring } from 'framer-motion'
 
 export default function Letter(props) {
@@ -18,7 +18,16 @@ export default function Letter(props) {
     stiffness: 700,
     damping: 100,
   };
-  
+
+  useEffect(() => {
+    if (props.letterText === props.currentK) {
+      if (props.n < 4) {
+        setPos([props.n * 100, 0])
+        props.setN(props.n + 1)
+      }
+    }
+  }, [props.currentK])
+
   return (
     <motion.div layout transition={springMotion} style={styles}>
       {props.letterText}
