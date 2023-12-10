@@ -6,10 +6,13 @@ import useKeyPress from 'react-use-keypress'
 
 
 export default function Game() {
-  const [layoutArr, setLayoutArr] = useState([['', '', '', ''], ['a', 'n', 'e', 'm']])
+  const [layoutArr, setLayoutArr] = useState([
+    ['', '', '', '', '', '', '', '', ''], 
+    ['a', 'n', 'e', 'm', 'w', 'v', 't', 'y', 'q']]
+  )
 
   // Updating state of key pressed
-  const ALLKEYS = 'name'.split('')
+  const ALLKEYS = ['a', 'n', 'e', 'm', 'w', 'v', 't', 'y', 'q']
   useKeyPress([...ALLKEYS, 'Backspace'], e => {
     moveLetters(e.key)
   })
@@ -52,12 +55,13 @@ export default function Game() {
   
   return (
     <div style={{width: '100vw', height: '100vh', display: 'grid', placeItems: 'center'}}>
-      <div style={{border: '1px solid red', width: '350px', height: '150px', position: 'relative'}}>
+      <div style={{border: '1px solid red', width: '610px', height: '150px', position: 'relative'}}>
         <BoardSVG />
-        <Letter letterText="a" x="0" y="100" layoutArr={layoutArr}/>
-        <Letter letterText="n" x="100" y="100" layoutArr={layoutArr} />
-        <Letter letterText="e" x="200" y="100" layoutArr={layoutArr} />
-        <Letter letterText="m" x="300" y="100" layoutArr={layoutArr} />
+
+        {['a', 'n', 'e', 'm', 'w', 'v', 't', 'y', 'q'].map((el, index) => {
+          return (<Letter key={index} letterText={el} x={70*index} y="100" layoutArr={layoutArr} />)
+        })}
+
       </div>
     </div>
   )
