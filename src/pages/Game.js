@@ -2,14 +2,17 @@ import React from 'react'
 import { useState } from 'react'
 import BoardSVG from '../components/BoardSVG.js'
 import Letter from '../components/Letter.js'
+import useKeyPress from 'react-use-keypress'
 
 
 export default function Game() {
   const [n, setN] = useState(0)
   const [currentK, setCurrentK] = useState('')
 
-  document.addEventListener('keydown', e => {
-    setCurrentK(e.key)
+  const ALLKEYS = 'qwertyuiopasdfghjklzxcvbnm'.split('')
+
+  useKeyPress(ALLKEYS, e => {
+    console.log(e.key)
   })
   
   return (

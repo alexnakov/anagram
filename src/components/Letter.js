@@ -19,17 +19,17 @@ export default function Letter(props) {
     damping: 100,
   };
 
-  useEffect(() => {
-    if (props.letterText === props.currentK) {
-      if (props.n < 4 && pos[1] == 100) {
-        setPos([props.n * 100, 0])
-        props.setN(props.n + 1)
-      } else if (pos[1] == 0) {
-        setPos([0, 100])
-        props.setN(props.n - 1)
-      }
-    }
-  }, [props.currentK])
+  // useEffect(() => {
+  //   if (props.letterText === props.currentK) {
+  //     if (props.n < 4 && pos[1] == 100) {
+  //       setPos([props.n * 100, 0])
+  //       props.setN(props.n + 1)
+  //     } else if (pos[1] == 0) {
+  //       setPos([0, 100])
+  //       props.setN(props.n - 1)
+  //     }
+  //   }
+  // }, [props.currentK])
 
   return (
     <motion.div layout transition={springMotion} style={styles}>
