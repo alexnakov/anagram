@@ -6,8 +6,7 @@ import useKeyPress from 'react-use-keypress'
 
 
 export default function Game() {
-  const [n, setN] = useState(0)
-  const [currentK, setCurrentK] = useState('')
+  
 
   const ALLKEYS = 'qwertyuiopasdfghjklzxcvbnm'.split('')
 
