@@ -18,7 +18,23 @@ export default function Letter(props) {
     stiffness: 700,
     damping: 100,
   };
-  
+
+
+  useEffect(() => {
+    convertLayoutArrToXYPos(props.layoutArr)
+  }, [props.layoutArr])
+
+  // Will change the pos state depending on the layoutArr
+  // Should only be using the setter function
+  const convertLayoutArrToXYPos = layoutArr => {
+    if (layoutArr[1].includes(props.letterText)) {
+      setPos([layoutArr[1].indexOf(props.letterText) * 100, 100])
+    } else if (layoutArr[0].includes(props.letterText)) {
+      setPos([layoutArr[0].indexOf(props.letterText) * 100, 0])
+    }
+    console.log(pos)
+  }
+
   return (
     <motion.div layout transition={springMotion} style={styles}>
       {props.letterText}

@@ -54,10 +54,10 @@ export default function Game() {
     <div style={{width: '100vw', height: '100vh', display: 'grid', placeItems: 'center'}}>
       <div style={{border: '1px solid red', width: '350px', height: '150px', position: 'relative'}}>
         <BoardSVG />
-        <Letter letterText="a" x="0" y="100" />
-        <Letter letterText="n" x="100" y="100" />
-        <Letter letterText="e" x="200" y="100" />
-        <Letter letterText="m" x="300" y="100" />
+        <Letter letterText="a" x="0" y="100" layoutArr={layoutArr}/>
+        <Letter letterText="n" x="100" y="100" layoutArr={layoutArr} />
+        <Letter letterText="e" x="200" y="100" layoutArr={layoutArr} />
+        <Letter letterText="m" x="300" y="100" layoutArr={layoutArr} />
       </div>
     </div>
   )
