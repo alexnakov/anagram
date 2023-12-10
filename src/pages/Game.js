@@ -6,17 +6,21 @@ import useKeyPress from 'react-use-keypress'
 
 
 export default function Game() {
+  const ALLKEYS = ['a', 'n', 'e', 'm', 'w', 'v', 't', 'y', 'i']
+  
+  // STATES
   const [layoutArr, setLayoutArr] = useState([
     ['', '', '', '', '', '', '', '', ''], 
-    ['a', 'n', 'e', 'm', 'w', 'v', 't', 'y', 'q']]
+    ALLKEYS]
   )
 
   // Updating state of key pressed
-  const ALLKEYS = ['a', 'n', 'e', 'm', 'w', 'v', 't', 'y', 'q']
+  // The Hook only listens if one of the 9 keys are pressed and no other keys.
   useKeyPress([...ALLKEYS, 'Backspace'], e => {
     moveLetters(e.key)
   })
 
+  // If a key is pressed, the code checks if the other Arr has a next free spot
   const moveLetters = currentK => { 
     if (currentK === 'Backspace') {
       let newLayout = [...layoutArr]
@@ -58,7 +62,7 @@ export default function Game() {
       <div style={{border: '1px solid red', width: '610px', height: '150px', position: 'relative'}}>
         <BoardSVG />
 
-        {['a', 'n', 'e', 'm', 'w', 'v', 't', 'y', 'q'].map((el, index) => {
+        {ALLKEYS.map((el, index) => {
           return (<Letter key={index} letterText={el} x={70*index} y="100" layoutArr={layoutArr} />)
         })}
 
