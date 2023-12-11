@@ -12,6 +12,7 @@ export default function Letter(props) {
     display: 'grid',
     placeItems: 'center',
     fontSize: 'x-large',
+    cursor: 'pointer',
     left: pos[0] + "px",
     top: pos[1] + "px",
   }
