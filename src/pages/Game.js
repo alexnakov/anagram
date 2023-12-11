@@ -9,6 +9,7 @@ export default function Game() {
   const ALLKEYS = ['a', 'n', 'e', 'm', 'w', 'v', 't', 'y', 'i']
   
   // STATES
+  const [finalWord, setFinalWord] = useState('')
   const [layoutArr, setLayoutArr] = useState([
     ['', '', '', '', '', '', '', '', ''], 
     ALLKEYS]
@@ -18,6 +19,7 @@ export default function Game() {
   // The Hook only listens if one of the 9 keys are pressed and no other keys.
   useKeyPress([...ALLKEYS, 'Backspace'], e => {
     moveLetters(e.key)
+    setFinalWord(layoutArr[0].filter(el => el !== ''))
   })
 
   // If a key is pressed, the code checks if the other Arr has a next free spot
@@ -30,7 +32,6 @@ export default function Game() {
           newLayout[1][firstEmptyIndex] = newLayout[0][i]
           newLayout[0][i] = ''
           setLayoutArr(newLayout)
-          console.log(layoutArr)
           break
         }
       }
@@ -43,7 +44,6 @@ export default function Game() {
       newLayout[0][selectedLetterIndex] = ''
       newLayout[1][firstEmptySpaceIndex] = currentK 
       setLayoutArr(newLayout)
-      console.log(layoutArr)
     } 
     else if (layoutArr[1].includes(currentK)) {
       let newLayout = [...layoutArr]
@@ -53,7 +53,6 @@ export default function Game() {
       newLayout[1][selectedLetterIndex] = ''
       newLayout[0][firstEmptySpaceIndex] = currentK 
       setLayoutArr(newLayout)
-      console.log(layoutArr)
     }
   }
   
