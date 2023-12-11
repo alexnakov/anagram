@@ -4,9 +4,21 @@ import BoardSVG from '../components/BoardSVG.js'
 import Letter from '../components/Letter.js'
 import useKeyPress from 'react-use-keypress'
 
+function get9RandomLetters() {
+  const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+  const randomLetters = [];
+
+  for (let i = 0; i < 9; i++) {
+    const randomIndex = Math.floor(Math.random() * alphabet.length);
+    const randomLetter = alphabet.charAt(randomIndex);
+    randomLetters.push(randomLetter);
+  }
+
+  return randomLetters;
+}
 
 export default function Game() {
-  const ALLKEYS = ['a', 'n', 'e', 'm', 'w', 'v', 't', 'y', 'i']
+  const ALLKEYS = get9RandomLetters()
   
   // STATES
   const [finalWord, setFinalWord] = useState('')
