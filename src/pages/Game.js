@@ -70,9 +70,17 @@ export default function Game() {
   
   return (
     <div style={{width: '100vw', height: '100vh', display: 'grid', placeItems: 'center'}}>
+      <div style={{width: '100', height: '100', border: '1px solid red', position: 'relative'}}>
+        <div style={{width: '50px', height: '50px', border: '1px solid blue', position: 'absolute',
+                    top: '26px', left: '20px'}}>
+          Hi</div>
+      </div>
       <div style={{border: '1px solid red', width: '610px', height: '150px', position: 'relative'}}>
         <BoardSVG />
 
+        {/*  TODO TODO TODO
+              Instead of mapping the static ALLKEYS, map the reactive layoutARR state
+        */}
         {ALLKEYS.map((el, index) => {
           return (<Letter key={index} letterText={el} x={70*index} y="100" layoutArr={layoutArr} />)
         })}
