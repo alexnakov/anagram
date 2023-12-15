@@ -4,19 +4,6 @@ import BoardSVG from '../components/BoardSVG.js'
 import Letter from '../components/Letter.js'
 import useKeyPress from 'react-use-keypress'
 
-function get9RandomLetters() {
-  const alphabet = 'abcdefghijklmnopqrstuvwxyz';
-  const randomLetters = [];
-
-  for (let i = 0; i < 9; i++) {
-    const randomIndex = Math.floor(Math.random() * alphabet.length);
-    const randomLetter = alphabet.charAt(randomIndex);
-    randomLetters.push(randomLetter);
-  }
-
-  return randomLetters;
-}
-
 export default function Game() {
   const ALLKEYS = ['a','b','c','d','e','f','g','h','i']
   
@@ -72,10 +59,7 @@ export default function Game() {
     <div style={{width: '100vw', height: '100vh', display: 'grid', placeItems: 'center'}}>
       <div style={{border: '1px solid red', width: '610px', height: '150px', position: 'relative'}}>
         <BoardSVG />
-
-        {/*  TODO TODO TODO
-              Instead of mapping the static ALLKEYS, map the reactive layoutARR state
-        */}
+        
         {ALLKEYS.map((el, index) => {
           return (<Letter key={index} letterText={el} x={70*index} y="100" layoutArr={layoutArr} />)
         })}
