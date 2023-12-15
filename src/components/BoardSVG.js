@@ -11,11 +11,11 @@ export default function BoardSVG() {
 
       {/* The following are removthe small pink rects */}
       {[0,1,2,3,4,5,6,7,8].map(v => {
-        return (<rect x={70*v} width="50" height="50" fill={squareColour} style={{zIndex: "-1"}}></rect>)
+        return (<rect key={v} x={70*v} width="50" height="50" fill={squareColour} style={{zIndex: "-1"}}></rect>)
       })}
 
       {[0,1,2,3,4,5,6,7,8].map(v => {
-        return (<rect x={70*v} y="100" width="50" height="50" fill={squareColour} style={{zIndex: "-1"}}></rect>)
+        return (<rect key={v} x={70*v} y="100" width="50" height="50" fill={squareColour} style={{zIndex: "-1"}}></rect>)
       })}
     </svg>
   )
