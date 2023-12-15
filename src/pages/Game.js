@@ -4,16 +4,37 @@ import BoardSVG from '../components/BoardSVG.js'
 import Letter from '../components/Letter.js'
 import useKeyPress from 'react-use-keypress'
 
+function get9RandomLetters() {
+  const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+  const randomLetters = [];
+
+  for (let i = 0; i < 9; i++) {
+    const randomIndex = Math.floor(Math.random() * alphabet.length);
+    const randomLetter = alphabet.charAt(randomIndex);
+    randomLetters.push(randomLetter);
+  }
+
+  return randomLetters;
+}
 
 export default function Game() {
-  const [layoutArr, setLayoutArr] = useState([['', '', '', ''], ['a', 'n', 'e', 'm']])
+  const ALLKEYS = get9RandomLetters()
+  
+  // STATES
+  const [finalWord, setFinalWord] = useState('')
+  const [layoutArr, setLayoutArr] = useState([
+    ['', '', '', '', '', '', '', '', ''], 
+    ALLKEYS]
+  )
 
   // Updating state of key pressed
-  const ALLKEYS = 'name'.split('')
+  // The Hook only listens if one of the 9 keys are pressed and no other keys.
   useKeyPress([...ALLKEYS, 'Backspace'], e => {
     moveLetters(e.key)
+    setFinalWord(layoutArr[0].filter(el => el !== ''))
   })
 
+  // If a key is pressed, the code checks if the other Arr has a next free spot
   const moveLetters = currentK => { 
     if (currentK === 'Backspace') {
       let newLayout = [...layoutArr]
@@ -23,7 +44,6 @@ export default function Game() {
           newLayout[1][firstEmptyIndex] = newLayout[0][i]
           newLayout[0][i] = ''
           setLayoutArr(newLayout)
-          console.log(layoutArr)
           break
         }
       }
@@ -36,7 +56,6 @@ export default function Game() {
       newLayout[0][selectedLetterIndex] = ''
       newLayout[1][firstEmptySpaceIndex] = currentK 
       setLayoutArr(newLayout)
-      console.log(layoutArr)
     } 
     else if (layoutArr[1].includes(currentK)) {
       let newLayout = [...layoutArr]
@@ -46,18 +65,26 @@ export default function Game() {
       newLayout[1][selectedLetterIndex] = ''
       newLayout[0][firstEmptySpaceIndex] = currentK 
       setLayoutArr(newLayout)
-      console.log(layoutArr)
     }
   }
   
   return (
     <div style={{width: '100vw', height: '100vh', display: 'grid', placeItems: 'center'}}>
-      <div style={{border: '1px solid red', width: '350px', height: '150px', position: 'relative'}}>
+      <div style={{width: '100', height: '100', border: '1px solid red', position: 'relative'}}>
+        <div style={{width: '50px', height: '50px', border: '1px solid blue', position: 'absolute',
+                    top: '26px', left: '20px'}}>
+          Hi</div>
+      </div>
+      <div style={{border: '1px solid red', width: '610px', height: '150px', position: 'relative'}}>
         <BoardSVG />
-        <Letter letterText="a" x="0" y="100" layoutArr={layoutArr}/>
-        <Letter letterText="n" x="100" y="100" layoutArr={layoutArr} />
-        <Letter letterText="e" x="200" y="100" layoutArr={layoutArr} />
-        <Letter letterText="m" x="300" y="100" layoutArr={layoutArr} />
+
+        {/*  TODO TODO TODO
+              Instead of mapping the static ALLKEYS, map the reactive layoutARR state
+        */}
+        {ALLKEYS.map((el, index) => {
+          return (<Letter key={index} letterText={el} x={70*index} y="100" layoutArr={layoutArr} />)
+        })}
+
       </div>
     </div>
   )
