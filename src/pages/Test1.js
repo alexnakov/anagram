@@ -1,15 +1,12 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import BoardSVG from '../components/BoardSVG.js'
-import Letter from '../components/Letter.js'
-import useKeyPress from 'react-use-keypress'
+import Letter from '../components/MoveableLetter.js'
 import { motion, spring } from 'framer-motion'
 
 // Going back to simple exmaple of framer-motion
 
-export default function Game() {
-  const [x, setX] = useState([0])
-
+function Letter2(props) {
   const styles = {
     width: '50px', height: '50px', 
     backgroundColor: 'red', 
@@ -19,7 +16,7 @@ export default function Game() {
     placeItems: 'center',
     fontSize: 'x-large',
     cursor: 'pointer',
-    left: x + "px",
+    left: props.xLeft[0] + "px",
     top: "0px",
   }
   const springMotion = {
@@ -28,27 +25,20 @@ export default function Game() {
     damping: 100,
   };
 
-  const handleClick = e => {
-    e.preventDefault()
-    let currentX = x
-    let newX = [Number(currentX[0]) + 20]
-    console.log(newX)
-    setX(newX)
-  }
+  return (
+    <motion.div style={styles} layout motion={springMotion}>
+      A
+    </motion.div>
+  )
+}
 
-  useKeyPress(['a'], e => {
-
-    setX(x+20)
-  })
-
+export default function Game() {
+  const [xLeft, setXLeft] = useState([0])
 
   return (
-    <div style={{width: '100vw', height: '100vh', display: 'grid', placeItems: 'center'}}>
+    <div onClick={() => setXLeft([xLeft[0]+30])} style={{width: '100vw', height: '100vh', display: 'grid', placeItems: 'center'}}>
       <div style={{border: '1px solid red', width: '610px', height: '150px', position: 'relative'}}>
-        <motion.div onClick={e => handleClick(e)} style={styles}
-          layout motion={springMotion}>
-          A
-        </motion.div>
+        <Letter2 xLeft={xLeft} />
       </div>
     </div>
   )

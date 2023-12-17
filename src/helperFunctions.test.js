@@ -22,59 +22,60 @@ const moveDown = (matrix) => {
   }
 }
 
-describe('moves letters down when matrix of positions is passed', () => {
-  test('it should move down the last letter for 1st time correctly', () => {
-    let matrix1 = [
-      ['a', 0, 0],
-      ['b', 70, 0],
-      ['c', 140, 0],
-      ['e', 210, 0],
-    ]
+function moveLetterUp(letter, layoutArr) {
+  var upRow = layoutArr[0]
+  var downRow = layoutArr[1]
+  
+  const arrWithDuplicates = downRow.filter(char => char === letter)
+  const firstNonLetterIndex = upRow.indexOf('')
 
-    let matrix2 = [
-      ['a', 0, 0],
-      ['b', 70, 0],
-      ['c', 140, 0],
-      ['e', 0, 100],
-    ]
+  if (arrWithDuplicates.length !== 0) {
+    upRow[firstNonLetterIndex] = arrWithDuplicates[0]
+    const indexOfFirstLetterInDownRow = downRow.indexOf(letter)
+
+    downRow[indexOfFirstLetterInDownRow] = ''
     
-    expect(moveDown(matrix1)).toEqual(matrix2);
-  });
+    return [[...upRow], [...downRow]]
+  }
+}
 
-  test('should move the 3rd letter to the 2nd pos as its the 2nd moveDown instance', () => {
-    let matrix2 = [
-      ['a', 0, 0],
-      ['b', 70, 0],
-      ['c', 140, 0],
-      ['e', 0, 100],
-    ]
 
-    let matrix3 = [
-      ['a', 0, 0],
-      ['b', 70, 0],
-      ['c', 70, 100],
-      ['e', 0, 100],
-    ]
+test('should move a letter up', () => {
+  let layoutArr1 = [
+    ['','','','','','','','',''],
+    ['a','b','c','d','e','f','g','h','i']
+  ]
 
-    expect(moveDown(matrix2)).toEqual(matrix3)
-  });
+  let layoutArr2 = [
+    ['h','','','','','','','',''],
+    ['a','b','c','d','e','f','g','','i']
+  ]
+  expect(moveLetterUp('h', layoutArr1)).toEqual(layoutArr2)
+})
 
-  test('should move the 2rd letter to the 3nd pos as its the 3rd moveDown instance', () => {
-    let matrix3 = [
-      ['a', 0, 0],
-      ['b', 70, 0],
-      ['c', 70, 100],
-      ['e', 0, 100],
-    ]
+test('should move a letter up', () => {
+  let layoutArr1 = [
+    ['','','','','','','','',''],
+    ['a','b','c','d','e','f','g','h','i']
+  ]
 
-    let matrix4 = [
-      ['a', 0, 0],
-      ['b', 140, 100],
-      ['c', 70, 100],
-      ['e', 0, 100],
-    ]
+  let layoutArr2 = [
+    ['i','','','','','','','',''],
+    ['a','b','c','d','e','f','g','h','']
+  ]
+  expect(moveLetterUp('i', layoutArr1)).toEqual(layoutArr2)
+})
 
-    expect(moveDown(matrix3)).toEqual(matrix4)
-  });
-});
+test('should move a letter up, handle duplicates', () => {
+  let layoutArr1 = [
+    ['','','','','','','','',''],
+    ['a','b','c','d','e','d','g','h','i']
+  ]
+
+  let layoutArr2 = [
+    ['d','','','','','','','',''],
+    ['a','b','c','','e','d','g','h','i']
+  ]
+  expect(moveLetterUp('d', layoutArr1)).toEqual(layoutArr2)
+})
 
