@@ -30,14 +30,14 @@ export default function MoveableLetter({left, character, id, canMoveArray, setCa
 
   const handleKeyPress = (e) => {
     if (e.key === character && canMoveArray[id] && nextFreeTopSpot < 9 && position[1] === 100) {
+
       setPosition([nextFreeTopSpot * 70, 0])
       setNextFreeTopSpot(nextFreeTopSpot + 1)
 
       changeMobilityTo(false)
     }
     else if (e.key === 'Backspace' && (nextFreeTopSpot-1) * 70 === position[0] && position[1] === 0) {
-      setPosition([0, 100])
-      setNextFreeTopSpot(nextFreeTopSpot - 1)
+
     }
   }
 
