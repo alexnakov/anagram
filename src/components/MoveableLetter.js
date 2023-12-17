@@ -36,7 +36,6 @@ export default function MoveableLetter({left, character, id, canMoveArray, setCa
       changeMobilityTo(false)
     }
     else if (e.key === 'Backspace' && (nextFreeTopSpot-1) * 70 === position[0] && position[1] === 0) {
-      console.log(nextFreeTopSpot * 70 === position[0])
       setPosition([0, 100])
       setNextFreeTopSpot(nextFreeTopSpot - 1)
     }
