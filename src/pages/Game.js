@@ -21,13 +21,22 @@ const getCanMoveArrayFromCharArray = charArray => {
 
   return moveArray
 }
+const generateArrOfRandomLetters = n => {
+  const alphabet = 'qwertyuioplkjhgfdsazxcvbnm'
+  const randomLettersArr = []
+
+  for (let i = 0; i < n; i++) {
+    var randomIndex = Math.floor(Math.random() * alphabet.length)
+    randomLettersArr.push(alphabet.charAt(randomIndex))
+  }
+
+  return randomLettersArr
+}
+
+const charactersArray = generateArrOfRandomLetters(9)
 
 export default function Game() {
-  const charactersArray = ['a', 'b', 'c', 'b']
-
-  const [canMoveArray, setCanMoveArray] = useState(
-    getCanMoveArrayFromCharArray(charactersArray)
-  )
+  const [canMoveArray, setCanMoveArray] = useState(getCanMoveArrayFromCharArray(charactersArray))
   const [nextFreeTopSpot, setNextFreeTopSpot] = useState(0)
   const [arrayOfFreeBottomSpots, setArrayOfFreeBottomSpots] = useState([])
 
