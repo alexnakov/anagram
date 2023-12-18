@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { motion, spring } from 'framer-motion'
 
-export default function MoveableLetter({left, character, id, canMoveArray, setCanMoveArray, nextFreeTopSpot, setNextFreeTopSpot}) {
+export default function MoveableLetter({left, character, id, canMoveArray, setCanMoveArray, nextFreeTopSpot, setNextFreeTopSpot, arrayOfFreeBottomSpots, setArrayOfFreeBottomSpots}) {
   const [position, setPosition] = useState([left, 100])
 
   const styles = {
@@ -28,16 +28,28 @@ export default function MoveableLetter({left, character, id, canMoveArray, setCa
     setCanMoveArray(modifiedArray)
   }
 
+  const addToArrayOfBottomFreeSpots = xPosition => {
+    const modifiedArray = [...arrayOfFreeBottomSpots]
+    modifiedArray.push(Math.round(xPosition / 70))
+    modifiedArray.sort((a, b) => a - b) // Ascending order array
+    setArrayOfFreeBottomSpots(modifiedArray)
+  }
+
   const handleKeyPress = (e) => {
     if (e.key === character && canMoveArray[id] && nextFreeTopSpot < 9 && position[1] === 100) {
+      addToArrayOfBottomFreeSpots(position[0])
 
       setPosition([nextFreeTopSpot * 70, 0])
       setNextFreeTopSpot(nextFreeTopSpot + 1)
-
       changeMobilityTo(false)
     }
     else if (e.key === 'Backspace' && (nextFreeTopSpot-1) * 70 === position[0] && position[1] === 0) {
-
+      setPosition([arrayOfFreeBottomSpots[0] * 70, 100])
+      var modifiedNextFreeBottomSpotArray = [...arrayOfFreeBottomSpots]
+      const removedFirstFreeSpotFromBottomArray = modifiedNextFreeBottomSpotArray.shift()
+      setArrayOfFreeBottomSpots(modifiedNextFreeBottomSpotArray)
+      setNextFreeTopSpot(nextFreeTopSpot - 1)
+      console.log(arrayOfFreeBottomSpots)
     }
   }
 
@@ -52,7 +64,7 @@ export default function MoveableLetter({left, character, id, canMoveArray, setCa
     const timeoutId = setTimeout(() => {
       
       changeMobilityTo(true)
-    }, 100)
+    }, 25)
 
     return () => {
       clearTimeout(timeoutId)
