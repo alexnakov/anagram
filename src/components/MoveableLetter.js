@@ -62,9 +62,8 @@ export default function MoveableLetter({left, character, id, canMoveArray, setCa
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      
       changeMobilityTo(true)
-    }, 25)
+    }, 1) // The next duplicates get freed almost immediately
 
     return () => {
       clearTimeout(timeoutId)
