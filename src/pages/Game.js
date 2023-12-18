@@ -17,7 +17,7 @@ export default function Game() {
         <MoveableLetter character={"a"} left={0} id={0} canMoveArray={canMoveArray} setCanMoveArray={setCanMoveArray} nextFreeTopSpot={nextFreeTopSpot} setNextFreeTopSpot={setNextFreeTopSpot} />
         <MoveableLetter character={"b"} left={70} id={1} canMoveArray={canMoveArray} setCanMoveArray={setCanMoveArray} nextFreeTopSpot={nextFreeTopSpot} setNextFreeTopSpot={setNextFreeTopSpot} />
         <MoveableLetter character={"c"} left={140} id={2} canMoveArray={canMoveArray} setCanMoveArray={setCanMoveArray} nextFreeTopSpot={nextFreeTopSpot} setNextFreeTopSpot={setNextFreeTopSpot} />
-        <MoveableLetter character={"b"} left={210} id={3} canMoveArray={canMoveArray} setCanMoveArray={setCanMoveArray} nextFreeTopSpot={nextFreeTopSpot} setNextFreeTopSpot={setNextFreeTopSpot}  />
+        <MoveableLetter character={"b"} left={210} id={3} canMoveArray={canMoveArray} setCanMoveArray={setCanMoveArray} nextFreeTopSpot={nextFreeTopSpot} setNextFreeTopSpot={setNextFreeTopSpot} />
       </div>
     </div>
   )
