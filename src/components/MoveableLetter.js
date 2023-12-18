@@ -49,7 +49,6 @@ export default function MoveableLetter({left, character, id, canMoveArray, setCa
       const removedFirstFreeSpotFromBottomArray = modifiedNextFreeBottomSpotArray.shift()
       setArrayOfFreeBottomSpots(modifiedNextFreeBottomSpotArray)
       setNextFreeTopSpot(nextFreeTopSpot - 1)
-      console.log(arrayOfFreeBottomSpots)
     }
   }
 
