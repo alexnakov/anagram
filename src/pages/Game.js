@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import BoardSVG from '../components/BoardSVG.js'
 import MoveableLetter from '../components/MoveableLetter.js'
-import useKeyPress from 'react-use-keypress'
 
 const getCanMoveArrayFromCharArray = charArray => {
   const charOccurrences = new Map()
@@ -35,6 +34,7 @@ const generateArrOfRandomLetters = n => {
 
 const charactersArray = generateArrOfRandomLetters(9)
 
+
 export default function Game() {
   const [canMoveArray, setCanMoveArray] = useState(getCanMoveArrayFromCharArray(charactersArray))
   const [nextFreeTopSpot, setNextFreeTopSpot] = useState(0)
@@ -47,7 +47,19 @@ export default function Game() {
 
         {charactersArray.map((char, id) => {
           return (
-            <MoveableLetter key={id} character={char} left={id*70} id={id} canMoveArray={canMoveArray} setCanMoveArray={setCanMoveArray} nextFreeTopSpot={nextFreeTopSpot} setNextFreeTopSpot={setNextFreeTopSpot} arrayOfFreeBottomSpots={arrayOfFreeBottomSpots} setArrayOfFreeBottomSpots={setArrayOfFreeBottomSpots} />
+            <MoveableLetter 
+              key={id} 
+              character={char} 
+              left={id*70} 
+              id={id} 
+              canMoveArray={canMoveArray} 
+              setCanMoveArray={setCanMoveArray} 
+              nextFreeTopSpot={nextFreeTopSpot} 
+              setNextFreeTopSpot={setNextFreeTopSpot} 
+              arrayOfFreeBottomSpots={arrayOfFreeBottomSpots} 
+              setArrayOfFreeBottomSpots={setArrayOfFreeBottomSpots}
+              charactersArray={charactersArray} 
+            />
           )
         })}
       </div>

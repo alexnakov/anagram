@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { motion, spring } from 'framer-motion'
 
-export default function MoveableLetter({left, character, id, canMoveArray, setCanMoveArray, nextFreeTopSpot, setNextFreeTopSpot, arrayOfFreeBottomSpots, setArrayOfFreeBottomSpots}) {
+export default function MoveableLetter({left, character, id, canMoveArray, setCanMoveArray, nextFreeTopSpot, setNextFreeTopSpot, arrayOfFreeBottomSpots, setArrayOfFreeBottomSpots, charactersArray}) {
   const [position, setPosition] = useState([left, 100])
 
   const styles = {
@@ -38,7 +38,6 @@ export default function MoveableLetter({left, character, id, canMoveArray, setCa
   const handleKeyPress = (e) => {
     if (e.key === character && canMoveArray[id] && nextFreeTopSpot < 9 && position[1] === 100) {
       addToArrayOfBottomFreeSpots(position[0])
-
       setPosition([nextFreeTopSpot * 70, 0])
       setNextFreeTopSpot(nextFreeTopSpot + 1)
       changeMobilityTo(false)
@@ -50,6 +49,9 @@ export default function MoveableLetter({left, character, id, canMoveArray, setCa
       setArrayOfFreeBottomSpots(modifiedNextFreeBottomSpotArray)
       setNextFreeTopSpot(nextFreeTopSpot - 1)
     }
+    else if (e.key == '1') {
+      console.log(canMoveArray)
+    }
   }
 
   useEffect(() => {
@@ -59,19 +61,19 @@ export default function MoveableLetter({left, character, id, canMoveArray, setCa
     };
   }, [canMoveArray])
 
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      changeMobilityTo(true)
-    }, 1) // The next duplicates get freed almost immediately
+  // useEffect(() => {
+  //   const timeoutId = setTimeout(() => {
+  //     changeMobilityTo(true)
+  //   }, 1) // The next duplicates get freed almost immediately
 
-    return () => {
-      clearTimeout(timeoutId)
-    }
-  }, [position, canMoveArray])
+  //   return () => {
+  //     clearTimeout(timeoutId)
+  //   }
+  // }, [position, canMoveArray])
 
   return (
     <motion.div layout transition={springMotion} style={styles}>
-      {character} ({id})
+      {character.toUpperCase()} {id}
     </motion.div>
   )
 }
