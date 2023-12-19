@@ -36,7 +36,7 @@ const charactersArray = generateArrOfRandomLetters(9)
 
 
 export default function Game() {
-  const [canMoveArray, setCanMoveArray] = useState(getCanMoveArrayFromCharArray(charactersArray))
+  const [canMoveUpArray, setCanMoveUpArray] = useState(getCanMoveArrayFromCharArray(charactersArray))
   const [nextFreeTopSpot, setNextFreeTopSpot] = useState(0)
   const [arrayOfFreeBottomSpots, setArrayOfFreeBottomSpots] = useState([])
 
@@ -52,8 +52,8 @@ export default function Game() {
               character={char} 
               left={id*70} 
               id={id} 
-              canMoveArray={canMoveArray} 
-              setCanMoveArray={setCanMoveArray} 
+              canMoveUpArray={canMoveUpArray} 
+              setCanMoveUpArray={setCanMoveUpArray} 
               nextFreeTopSpot={nextFreeTopSpot} 
               setNextFreeTopSpot={setNextFreeTopSpot} 
               arrayOfFreeBottomSpots={arrayOfFreeBottomSpots} 

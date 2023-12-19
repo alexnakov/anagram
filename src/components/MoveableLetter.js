@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { motion, spring } from 'framer-motion'
 
-export default function MoveableLetter({left, character, id, canMoveArray, setCanMoveArray, nextFreeTopSpot, setNextFreeTopSpot, arrayOfFreeBottomSpots, setArrayOfFreeBottomSpots, charactersArray}) {
+export default function MoveableLetter({left, character, id, canMoveUpArray, setCanMoveUpArray, nextFreeTopSpot, setNextFreeTopSpot, arrayOfFreeBottomSpots, setArrayOfFreeBottomSpots, charactersArray}) {
   const [position, setPosition] = useState([left, 100])
 
   const styles = {
@@ -23,9 +23,9 @@ export default function MoveableLetter({left, character, id, canMoveArray, setCa
   };
 
   const changeMobilityTo = bool => {
-    const modifiedArray = [...canMoveArray]
+    const modifiedArray = [...canMoveUpArray]
     modifiedArray[id] = bool
-    setCanMoveArray(modifiedArray)
+    setCanMoveUpArray(modifiedArray)
   }
 
   const addToArrayOfBottomFreeSpots = xPosition => {
@@ -36,7 +36,7 @@ export default function MoveableLetter({left, character, id, canMoveArray, setCa
   }
 
   const handleKeyPress = (e) => {
-    if (e.key === character && canMoveArray[id] && nextFreeTopSpot < 9 && position[1] === 100) {
+    if (e.key === character && canMoveUpArray[id] && nextFreeTopSpot < 9 && position[1] === 100) {
       addToArrayOfBottomFreeSpots(position[0])
       setPosition([nextFreeTopSpot * 70, 0])
       setNextFreeTopSpot(nextFreeTopSpot + 1)
@@ -50,7 +50,10 @@ export default function MoveableLetter({left, character, id, canMoveArray, setCa
       setNextFreeTopSpot(nextFreeTopSpot - 1)
     }
     else if (e.key == '1') {
-      console.log(canMoveArray)
+      console.log(canMoveUpArray)
+    }
+    else {
+      return
     }
   }
 
@@ -59,7 +62,7 @@ export default function MoveableLetter({left, character, id, canMoveArray, setCa
     return () => {
       window.removeEventListener('keyup', handleKeyPress)
     };
-  }, [canMoveArray])
+  }, [canMoveUpArray])
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -69,7 +72,7 @@ export default function MoveableLetter({left, character, id, canMoveArray, setCa
     return () => {
       clearTimeout(timeoutId)
     }
-  }, [position, canMoveArray])
+  }, [position, canMoveUpArray])
 
   return (
     <motion.div layout transition={springMotion} style={styles}>
