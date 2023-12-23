@@ -21,8 +21,19 @@ export default function MoveableLetter(props) {
     damping: 100,
   };
 
+  const handleClick = e => {
+    if (props.positionY === 100) {
+      const topRow = props.charStates.filter(obj => obj.positionY === 0)
+      const newXCoord = topRow.length * 70
+      const newCharStates = [...props.charStates]
+      newCharStates[props.id].positionX = newXCoord
+      newCharStates[props.id].positionY = 0
+      props.setCharStates(newCharStates)
+    }
+  }
+
   return (
-    <motion.div layout transition={springMotion} style={styles}>
+    <motion.div onClick={e => handleClick(e)} layout transition={springMotion} style={styles}>
       {props.character.toUpperCase()}
     </motion.div>
   )

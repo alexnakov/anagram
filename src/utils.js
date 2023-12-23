@@ -33,12 +33,19 @@ const createArrayOfMapsfromChars = charArray => {
   return arrayOfMaps
 }
 
+const sampleData = [
+  { id: 0, char: 'v', positionX: 0, positionY: 100, canMove: true },
+  { id: 1, char: 'x', positionX: 70, positionY: 100, canMove: true },
+  { id: 2, char: 'w', positionX: 140, positionY: 100, canMove: true },
+  { id: 3, char: 'k', positionX: 210, positionY: 100, canMove: true },
+  { id: 4, char: 'p', positionX: 280, positionY: 100, canMove: true },
+  { id: 5, char: 'b', positionX: 350, positionY: 100, canMove: true },
+  { id: 6, char: 'z', positionX: 420, positionY: 100, canMove: true },
+  { id: 7, char: 'n', positionX: 490, positionY: 100, canMove: true },
+  { id: 8, char: 'p', positionX: 560, positionY: 100, canMove: false }
+]
 
-
-module.exports = {
-  generateNRandomLetters,
-  createArrayOfMapsfromChars
-}
+console.log(sampleData.filter(obj => obj.positionX === 70))
 
 
 
