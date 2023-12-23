@@ -54,11 +54,26 @@ export default function MoveableLetter(props) {
     props.setCharStates(newCharStates)
   }
 
+  const enableNextSameCharToMoveUp = () => {
+    const newCharStatesAscendingX = [...props.charStates].sort((a, b) => a.positionX - b.positionY)
+
+    for (let i = 0; i < newCharStatesAscendingX.length; i++) {
+      if (newCharStatesAscendingX[i].positionY == 100 && newCharStatesAscendingX[i].char == props.character) {
+        newCharStatesAscendingX[i].canMoveUp= true
+        break
+      }
+    }
+
+
+    props.setCharStates(newCharStatesAscendingX.sort((a, b) => a.id - b.id))
+  }
+
   const handleClick = e => {
     moveLetterUp()
     disableMoveUp()
     allowLetterToMoveBackDown()
     makeAllPreviousTopRowLetterNotMoveableDown()
+    enableNextSameCharToMoveUp()
     props.inputElement.current.focus() // Make game, keyboard main again
   }
 
