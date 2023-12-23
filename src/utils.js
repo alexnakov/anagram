@@ -17,14 +17,15 @@ const createArrayOfMapsfromChars = charArray => {
   const duplicatesArray = []
 
   for (let i = 0; i < charArray.length; i++) {
-    let canMove = true
+    let canMoveUp = true
 
     if (duplicatesArray.includes(charArray[i])) {
-      canMove = false
+      canMoveUp = false
     }
 
     arrayOfMaps.push({
-      id: i, char: charArray[i], positionX: 70*i, positionY: 100, canMove: canMove,
+      id: i, char: charArray[i], positionX: 70*i, positionY: 100, 
+      canMoveUp: canMoveUp, canMoveDown: false,
     })
 
     duplicatesArray.push(charArray[i])
@@ -34,18 +35,20 @@ const createArrayOfMapsfromChars = charArray => {
 }
 
 const sampleData = [
-  { id: 0, char: 'v', positionX: 0, positionY: 100, canMove: true },
-  { id: 1, char: 'x', positionX: 70, positionY: 100, canMove: true },
-  { id: 2, char: 'w', positionX: 140, positionY: 100, canMove: true },
-  { id: 3, char: 'k', positionX: 210, positionY: 100, canMove: true },
-  { id: 4, char: 'p', positionX: 280, positionY: 100, canMove: true },
-  { id: 5, char: 'b', positionX: 350, positionY: 100, canMove: true },
-  { id: 6, char: 'z', positionX: 420, positionY: 100, canMove: true },
-  { id: 7, char: 'n', positionX: 490, positionY: 100, canMove: true },
-  { id: 8, char: 'p', positionX: 560, positionY: 100, canMove: false }
+  { id: 0, char: 'v', positionX: 0, positionY: 100, canMoveUp: true, canMoveDown: false },
+  { id: 1, char: 'x', positionX: 70, positionY: 100, canMoveUp: true, canMoveDown: false },
+  { id: 2, char: 'w', positionX: 140, positionY: 100, canMoveUp: true, canMoveDown: false },
+  { id: 3, char: 'k', positionX: 210, positionY: 100, canMoveUp: true, canMoveDown: false },
+  { id: 4, char: 'p', positionX: 280, positionY: 100, canMoveUp: true, canMoveDown: false },
+  { id: 5, char: 'b', positionX: 350, positionY: 100, canMoveUp: true, canMoveDown: false },
+  { id: 6, char: 'z', positionX: 420, positionY: 100, canMoveUp: true, canMoveDown: false },
+  { id: 7, char: 'n', positionX: 490, positionY: 100, canMoveUp: true, canMoveDown: false },
+  { id: 8, char: 'p', positionX: 560, positionY: 100, canMoveUp: false, canMoveDown: false }
 ]
 
-console.log(sampleData.filter(obj => obj.positionX === 70))
+const arr1 = generateNRandomLetters(9)
+const data = createArrayOfMapsfromChars(arr1)
+console.log(data)
 
 
 
