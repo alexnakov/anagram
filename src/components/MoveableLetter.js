@@ -32,15 +32,34 @@ export default function MoveableLetter(props) {
     }
   }
 
+  const disableMoveUp = () => {
+    const newCharStates = [...props.charStates]
+    newCharStates[props.id].canMoveUp = false
+  }
+
   const allowLetterToMoveBackDown = () => {
     const newCharStates = [...props.charStates]
     newCharStates[props.id].canMoveDown = true
   }
 
+  const makeAllPreviousTopRowLetterNotMoveableDown = () => {
+    const newCharStates = [...props.charStates]
+
+    newCharStates.forEach(charObj => {
+      if (charObj.id !== props.id) {
+        charObj.canMoveDown = false
+      }
+    });
+
+    props.setCharStates(newCharStates)
+  }
+
   const handleClick = e => {
     moveLetterUp()
+    disableMoveUp()
     allowLetterToMoveBackDown()
-    props.inputElement.current.focus()
+    makeAllPreviousTopRowLetterNotMoveableDown()
+    props.inputElement.current.focus() // Make game, keyboard main again
   }
 
   return (

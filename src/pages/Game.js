@@ -22,14 +22,15 @@ const createArrayOfMapsfromChars = charArray => {
   const duplicatesArray = []
 
   for (let i = 0; i < charArray.length; i++) {
-    let canMove = true
+    let canMoveUp = true
 
     if (duplicatesArray.includes(charArray[i])) {
-      canMove = false
+      canMoveUp = false
     }
 
     arrayOfMaps.push({
-      id: i, char: charArray[i], positionX: 70*i, positionY: 100, canMove: canMove,
+      id: i, char: charArray[i], positionX: 70*i, positionY: 100, 
+      canMoveUp: canMoveUp, canMoveDown: false,
     })
 
     duplicatesArray.push(charArray[i])
