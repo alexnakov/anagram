@@ -101,8 +101,23 @@ export default function Game() {
       resetCanMoveUpBottomRow()
       allowNewLastLetterToMoveDown()
     } 
-    else if (e.key == '0') {
+    else if (e.key == '0') { // for testing purposes
       console.log(charStates)
+    }
+    else if (nineRandomLetters.includes(e.key)) {
+      const charStatesDuplicateSorted = [...charStates].sort((a,b) => a.positionX - b.positionX)
+      const lowestBottomRowLetterDuplicate = charStatesDuplicateSorted.find(charObj => charObj.positionY === 100 && charObj.char === e.key)
+      if (lowestBottomRowLetterDuplicate == undefined) { return; }
+      const topRowLength = charStates.filter(charObj => charObj.positionY === 0).length
+      const newXCoord = topRowLength * 70
+      lowestBottomRowLetterDuplicate.positionX = newXCoord
+      lowestBottomRowLetterDuplicate.positionY = 0
+      lowestBottomRowLetterDuplicate.canMoveDown = true
+      lowestBottomRowLetterDuplicate.canMoveUp = false
+
+      const newCharStates = [...charStates]
+      newCharStates[charStatesDuplicateSorted.id] = lowestBottomRowLetterDuplicate
+      setCharStates(newCharStates)
     }
   }
 
@@ -117,7 +132,7 @@ export default function Game() {
             positionX={obj.positionX} positionY={obj.positionY}
             canMove={obj.canMove} character={obj.char} 
             charStates={charStates}  setCharStates={setCharStates}
-            inputElement={inputElement}
+            inputElement={inputElement} 
             />
         )})}
       </div>
