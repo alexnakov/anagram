@@ -52,7 +52,9 @@ export default function Game() {
         {charStates.map(obj => {
           return (<MoveableLetter key={obj.id} id={obj.id} 
             positionX={obj.positionX} positionY={obj.positionY}
-            canMove={obj.canMove} character={obj.char} />
+            canMove={obj.canMove} character={obj.char} 
+            charStates={charStates}  setCharStates={setCharStates}
+            />
         )})}
       </div>
     </div>
