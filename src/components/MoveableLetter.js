@@ -21,7 +21,7 @@ export default function MoveableLetter(props) {
     damping: 100,
   };
 
-  const handleClick = e => {
+  const moveLetterUp = () => {
     if (props.positionY === 100) {
       const topRow = props.charStates.filter(obj => obj.positionY === 0)
       const newXCoord = topRow.length * 70
@@ -30,6 +30,17 @@ export default function MoveableLetter(props) {
       newCharStates[props.id].positionY = 0
       props.setCharStates(newCharStates)
     }
+  }
+
+  const allowLetterToMoveBackDown = () => {
+    const newCharStates = [...props.charStates]
+    newCharStates[props.id].canMoveDown = true
+  }
+
+  const handleClick = e => {
+    moveLetterUp()
+    allowLetterToMoveBackDown()
+    props.inputElement.current.focus()
   }
 
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useState } from 'react'
 import BoardSVG from '../components/BoardSVG.js'
 import MoveableLetter from '../components/MoveableLetter.js'
@@ -43,16 +43,20 @@ const arrayOfMapsFromChars = createArrayOfMapsfromChars(nineRandomLetters)
 
 export default function Game() {
   const [charStates, setCharStates] = useState(arrayOfMapsFromChars)
+  const inputElement = useRef()
 
   const handleBackspace = e => {
     if (e.key == 'Backspace') { // Should be 'Backspace'
       
+    } 
+    else if (e.key == '0') {
+      console.log(charStates)
     }
   }
 
   return (
     <div style={{width: '100vw', height: '100vh', display: 'grid', placeItems: 'center'}}>
-      <input autoFocus onKeyUp={e => handleBackspace(e)} style={{border: '1px solid red', height: '100px', position: 'absolute', outline: 'none', caretColor: 'transparent', color: '#000', opacity: 0.5, top: '100px', display: 'block'}} />
+      <input ref={inputElement} autoFocus onKeyUp={e => handleBackspace(e)} style={{border: '1px solid red', height: '100px', position: 'absolute', outline: 'none', caretColor: 'transparent', color: '#000', opacity: 0.5, top: '100px', display: 'block'}} />
       <div style={{border: '1px solid red', width: '610px', height: '150px', position: 'relative'}}>
         <BoardSVG />
 
@@ -61,7 +65,7 @@ export default function Game() {
             positionX={obj.positionX} positionY={obj.positionY}
             canMove={obj.canMove} character={obj.char} 
             charStates={charStates}  setCharStates={setCharStates}
-            
+            inputElement={inputElement}
             />
         )})}
       </div>
