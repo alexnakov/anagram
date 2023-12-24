@@ -39,6 +39,9 @@ const createArrayOfMapsfromChars = charArray => {
   return arrayOfMaps
 }
 
+const doesLetterOccupyTheseCoords = (arrCharObjects, x, y) => {
+  return arrCharObjects.some(charObj => charObj.positionX === x && charObj.positionY === y)
+}
 const nineRandomLetters = generateNRandomLetters(9)
 const arrayOfMapsFromChars = createArrayOfMapsfromChars(nineRandomLetters)
 
@@ -46,9 +49,26 @@ export default function Game() {
   const [charStates, setCharStates] = useState(arrayOfMapsFromChars)
   const inputElement = useRef()
 
+  const moveLetterDown = () => {
+    const newCharStates = [...charStates]
+    const topRow = charStates.filter(charObj => charObj.positionY === 0).sort((a, b) => a.positionX - b.positionX)
+    if (topRow.length !== 0) {
+      const charObjToMove = topRow[topRow.length - 1]
+      for (let i = 0; i < 9; i++) {
+        if (!doesLetterOccupyTheseCoords(charStates, i*70, 100)) {
+          charObjToMove.positionX = 70*i
+          charObjToMove.positionY = 100
+          newCharStates[charObjToMove.id] = charObjToMove
+          setCharStates(newCharStates)
+          break
+        }
+      }
+    }
+  }
+
   const handleBackspace = e => {
     if (e.key == 'Backspace') { // Should be 'Backspace'
-      
+      moveLetterDown()
     } 
     else if (e.key == '0') {
       console.log(charStates)
