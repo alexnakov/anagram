@@ -54,6 +54,7 @@ export default function Game() {
             positionX={obj.positionX} positionY={obj.positionY}
             canMove={obj.canMove} character={obj.char} 
             charStates={charStates}  setCharStates={setCharStates}
+            
             />
         )})}
       </div>
