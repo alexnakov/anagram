@@ -58,6 +58,7 @@ export default function Game() {
         if (!doesLetterOccupyTheseCoords(charStates, i*70, 100)) {
           charObjToMove.positionX = 70*i
           charObjToMove.positionY = 100
+          charObjToMove.canMoveDown = false
           newCharStates[charObjToMove.id] = charObjToMove
           setCharStates(newCharStates)
           break
@@ -66,9 +67,39 @@ export default function Game() {
     }
   }
 
+  const resetCanMoveUpBottomRow = () => {
+    const newCharStatesXSorted = [...charStates].sort((a,b)=>a.positionX-b.positionY)
+    const lettersArr = []
+    for (let i = 0; i < newCharStatesXSorted.length; i++) {
+      if (newCharStatesXSorted[i].positionY === 100) {
+        if (!lettersArr.includes(newCharStatesXSorted[i].char)) {
+          newCharStatesXSorted[i].canMoveUp = true;
+          lettersArr.push(newCharStatesXSorted[i].char)
+        } else {
+          newCharStatesXSorted[i].canMoveUp = false
+        }
+      }
+    }
+
+    setCharStates(newCharStatesXSorted.sort((a,b)=>a.id - b.id))
+  }
+
+  const allowNewLastLetterToMoveDown = () => {
+    const topRow = charStates.filter(charObj => charObj.positionY === 0).sort((a, b)=>a.positionX-b.positionX)
+    if (topRow.length === 0) { return; }
+    const newLastTopLetter = topRow[topRow.length - 1]
+    newLastTopLetter.canMoveDown = true
+    const idOfNewLastTopLetter = topRow[topRow.length - 1].id
+    const newCharStates = [...charStates]
+    newCharStates[idOfNewLastTopLetter] = newLastTopLetter
+    setCharStates(newCharStates)
+  }
+
   const handleBackspace = e => {
     if (e.key == 'Backspace') { // Should be 'Backspace'
       moveLetterDown()
+      resetCanMoveUpBottomRow()
+      allowNewLastLetterToMoveDown()
     } 
     else if (e.key == '0') {
       console.log(charStates)
