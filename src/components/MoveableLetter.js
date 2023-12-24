@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { motion, spring } from 'framer-motion'
 
-export default function MoveableLetter({left, character, id, canMoveUpArray, setCanMoveUpArray, nextFreeTopSpot, setNextFreeTopSpot, arrayOfFreeBottomSpots, setArrayOfFreeBottomSpots, charactersArray}) {
-  const [position, setPosition] = useState([left, 100])
-
+export default function MoveableLetter(props) {
   const styles = {
     width: '50px', height: '50px', 
     backgroundColor: 'red', 
@@ -13,70 +11,75 @@ export default function MoveableLetter({left, character, id, canMoveUpArray, set
     placeItems: 'center',
     fontSize: 'x-large',
     cursor: 'pointer',
-    left: position[0] + "px",
-    top: position[1] + "px",
+    left: props.positionX + "px",
+    top: props.positionY + "px",
   }
+
   const springMotion = {
     type: "spring",
     stiffness: 700,
     damping: 100,
   };
 
-  const changeMobilityTo = bool => {
-    const modifiedArray = [...canMoveUpArray]
-    modifiedArray[id] = bool
-    setCanMoveUpArray(modifiedArray)
-  }
-
-  const addToArrayOfBottomFreeSpots = xPosition => {
-    const modifiedArray = [...arrayOfFreeBottomSpots]
-    modifiedArray.push(Math.round(xPosition / 70))
-    modifiedArray.sort((a, b) => a - b) // Ascending order array
-    setArrayOfFreeBottomSpots(modifiedArray)
-  }
-
-  const handleKeyPress = (e) => {
-    if (e.key === character && canMoveUpArray[id] && nextFreeTopSpot < 9 && position[1] === 100) {
-      addToArrayOfBottomFreeSpots(position[0])
-      setPosition([nextFreeTopSpot * 70, 0])
-      setNextFreeTopSpot(nextFreeTopSpot + 1)
-      changeMobilityTo(false)
-    }
-    else if (e.key === 'Backspace' && (nextFreeTopSpot-1) * 70 === position[0] && position[1] === 0) {
-      setPosition([arrayOfFreeBottomSpots[0] * 70, 100])
-      var modifiedNextFreeBottomSpotArray = [...arrayOfFreeBottomSpots]
-      const removedFirstFreeSpotFromBottomArray = modifiedNextFreeBottomSpotArray.shift()
-      setArrayOfFreeBottomSpots(modifiedNextFreeBottomSpotArray)
-      setNextFreeTopSpot(nextFreeTopSpot - 1)
-    }
-    else if (e.key == '1') {
-      console.log(canMoveUpArray)
-    }
-    else {
-      return
+  const moveLetterUp = () => {
+    if (props.positionY === 100) {
+      const topRow = props.charStates.filter(obj => obj.positionY === 0)
+      const newXCoord = topRow.length * 70
+      const newCharStates = [...props.charStates]
+      newCharStates[props.id].positionX = newXCoord
+      newCharStates[props.id].positionY = 0
+      props.setCharStates(newCharStates)
     }
   }
 
-  useEffect(() => {
-    window.addEventListener('keyup', handleKeyPress)
-    return () => {
-      window.removeEventListener('keyup', handleKeyPress)
-    };
-  }, [canMoveUpArray])
+  const disableMoveUp = () => {
+    const newCharStates = [...props.charStates]
+    newCharStates[props.id].canMoveUp = false
+  }
 
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      changeMobilityTo(true)
-    }, 1) // The next duplicates get freed almost immediately
+  const allowLetterToMoveBackDown = () => {
+    const newCharStates = [...props.charStates]
+    newCharStates[props.id].canMoveDown = true
+  }
 
-    return () => {
-      clearTimeout(timeoutId)
+  const makeAllPreviousTopRowLetterNotMoveableDown = () => {
+    const newCharStates = [...props.charStates]
+
+    newCharStates.forEach(charObj => {
+      if (charObj.id !== props.id) {
+        charObj.canMoveDown = false
+      }
+    });
+
+    props.setCharStates(newCharStates)
+  }
+
+  const enableNextSameCharToMoveUp = () => {
+    const newCharStatesAscendingX = [...props.charStates].sort((a, b) => a.positionX - b.positionY)
+
+    for (let i = 0; i < newCharStatesAscendingX.length; i++) {
+      if (newCharStatesAscendingX[i].positionY == 100 && newCharStatesAscendingX[i].char == props.character) {
+        newCharStatesAscendingX[i].canMoveUp= true
+        break
+      }
     }
-  }, [position, canMoveUpArray])
+
+
+    props.setCharStates(newCharStatesAscendingX.sort((a, b) => a.id - b.id))
+  }
+
+  const handleClick = e => {
+    moveLetterUp()
+    disableMoveUp()
+    allowLetterToMoveBackDown()
+    makeAllPreviousTopRowLetterNotMoveableDown()
+    enableNextSameCharToMoveUp()
+    props.inputElement.current.focus() // Make game, keyboard main again
+  }
 
   return (
-    <motion.div layout transition={springMotion} style={styles}>
-      {character.toUpperCase()} {id}
+    <motion.div onClick={e => handleClick(e)} layout transition={springMotion} style={styles}>
+      {props.character.toUpperCase()}
     </motion.div>
   )
 }

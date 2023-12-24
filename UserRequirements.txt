@@ -1,7 +1,0 @@
-- Make the ids on the letters disappear
-// I still need the ids for further debugging
-
-- when a letter moves up, make the next duplicated letter
-  in the down road moveable, if there is a next same letter.
-
-

@@ -37,6 +37,11 @@
       "last 1 safari version"
     ]
   },
+  "compilerOptions": {
+    "module": "es20215",
+    "target": "es20215",
+    "sourceMap": true
+  },
   "devDependencies": {
     "typescript": "^5.3.3"
   }
