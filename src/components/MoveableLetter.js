@@ -32,8 +32,20 @@ export default function MoveableLetter(props) {
     }
   }
 
+  const updateFinalWord = () => {
+    const topRow = props.charStates.filter(charObj => charObj.positionY === 0).sort((a,b) => a.positionX - b.positionX)
+    var newFinalWord = ''
+    if (topRow.length !== 0) {
+      topRow.forEach(charObj => {
+        newFinalWord += charObj.char
+      });
+    }
+    props.setFinalWord(newFinalWord)
+  }
+
   const handleClick = e => {
     moveLetterUpOnSelfClickUp()
+    updateFinalWord()
     props.inputElement.current.focus() // Make game, keyboard main again
   }
 

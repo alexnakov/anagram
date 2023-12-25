@@ -37,6 +37,7 @@ const nineRandomLetters = generateNRandomLetters(9)
 const arrayOfMapsFromChars = createArrayOfMapsfromChars(nineRandomLetters)
 
 export default function Game() {
+  const [finalWord, setFinalWord] = useState('')
   const [charStates, setCharStates] = useState(arrayOfMapsFromChars)
   const inputElement = useRef()
 
@@ -72,6 +73,17 @@ export default function Game() {
     setCharStates(newCharStates)
   }
 
+  const updateFinalWord = () => {
+    const topRow = charStates.filter(charObj => charObj.positionY === 0).sort((a,b) => a.positionX - b.positionX)
+    var newFinalWord = ''
+    if (topRow.length !== 0) {
+      topRow.forEach(charObj => {
+        newFinalWord += charObj.char
+      });
+    }
+    setFinalWord(newFinalWord)
+  }
+
   const handleKeyPresses = e => {
     if (e.key == 'Backspace') { // Should be 'Backspace'
       moveLetterDownOnBackspace()
@@ -82,6 +94,8 @@ export default function Game() {
     else if (nineRandomLetters.includes(e.key.toLowerCase())) {
       moveLetterUpOnKeyPress(e.key.toLowerCase())
     }
+
+    updateFinalWord()
   }
 
   return (
@@ -94,7 +108,7 @@ export default function Game() {
           return (<MoveableLetter key={obj.id} id={obj.id} 
             positionX={obj.positionX} positionY={obj.positionY} character={obj.char} 
             charStates={charStates}  setCharStates={setCharStates}
-            inputElement={inputElement} 
+            inputElement={inputElement} setFinalWord={setFinalWord}
             />
         )})}
       </div>

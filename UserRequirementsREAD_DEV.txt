@@ -1,4 +1,6 @@
+NOTE: Leave design and figures to last. Focus on functionality.
+
 Next Steps:
 
-- Since the main single-player functionality of the app is almost finished,
-  you can work on some design of the latter and the backgroundColor
+- Learn how to check whether a word works or not, using a db or api
+
