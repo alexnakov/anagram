@@ -1,11 +1,4 @@
-Next steps:
+Next Steps:
 
-- Handle caps lock to work
-
-After that:
-
-- work on making the input box really autofocused after every event
 - Since the main single-player functionality of the app is almost finished,
   you can work on some design of the latter and the backgroundColor
-
-
