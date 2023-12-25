@@ -21,8 +21,8 @@ export default function MoveableLetter(props) {
     damping: 100,
   };
 
-  const moveLetterUp = () => {
-    if (props.positionY === 100) {
+  const moveLetterUpOnSelfClickUp = () => {
+    if (props.positionY === 100) { // If this fails, the letter clicked is not in the bottom row
       const topRow = props.charStates.filter(obj => obj.positionY === 0)
       const newXCoord = topRow.length * 70
       const newCharStates = [...props.charStates]
@@ -32,48 +32,8 @@ export default function MoveableLetter(props) {
     }
   }
 
-  const disableMoveUp = () => {
-    const newCharStates = [...props.charStates]
-    newCharStates[props.id].canMoveUp = false
-  }
-
-  const allowLetterToMoveBackDown = () => {
-    const newCharStates = [...props.charStates]
-    newCharStates[props.id].canMoveDown = true
-  }
-
-  const makeAllPreviousTopRowLetterNotMoveableDown = () => {
-    const newCharStates = [...props.charStates]
-
-    newCharStates.forEach(charObj => {
-      if (charObj.id !== props.id) {
-        charObj.canMoveDown = false
-      }
-    });
-
-    props.setCharStates(newCharStates)
-  }
-
-  const enableNextSameCharToMoveUp = () => {
-    const newCharStatesAscendingX = [...props.charStates].sort((a, b) => a.positionX - b.positionY)
-
-    for (let i = 0; i < newCharStatesAscendingX.length; i++) {
-      if (newCharStatesAscendingX[i].positionY == 100 && newCharStatesAscendingX[i].char == props.character) {
-        newCharStatesAscendingX[i].canMoveUp= true
-        break
-      }
-    }
-
-
-    props.setCharStates(newCharStatesAscendingX.sort((a, b) => a.id - b.id))
-  }
-
   const handleClick = e => {
-    moveLetterUp()
-    disableMoveUp()
-    allowLetterToMoveBackDown()
-    makeAllPreviousTopRowLetterNotMoveableDown()
-    enableNextSameCharToMoveUp()
+    moveLetterUpOnSelfClickUp()
     props.inputElement.current.focus() // Make game, keyboard main again
   }
 
