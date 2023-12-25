@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useState } from 'react'
 import BoardSVG from '../components/BoardSVG.js'
 import MoveableLetter from '../components/MoveableLetter.js'
@@ -40,6 +40,12 @@ export default function Game() {
   const [finalWord, setFinalWord] = useState('')
   const [charStates, setCharStates] = useState(arrayOfMapsFromChars)
   const inputElement = useRef()
+
+  useEffect(() => {
+    fetch('../data/combined_words.json')
+      .then(res => res.json())
+      .then(data => console.log(data[0]))
+  }, [finalWord])
 
   const moveLetterDownOnBackspace = () => {
     const newCharStates = [...charStates]
