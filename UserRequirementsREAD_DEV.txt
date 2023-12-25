@@ -1,9 +1,5 @@
 Next steps:
 
-- Clean up your excitation/de-excitation functions
-- Decide whether the canMoveUp, canMoveDown attributes are needed.
-  I don't seem to use that thanks to the single fire of the onKeyUp inline
-  event in the transparents, self-focusing input box.
 - Handle caps lock to work
 
 After that:
