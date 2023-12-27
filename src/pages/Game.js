@@ -41,12 +41,6 @@ export default function Game() {
   const [charStates, setCharStates] = useState(arrayOfMapsFromChars)
   const inputElement = useRef()
 
-  useEffect(() => {
-    fetch('../data/combined_words.json')
-      .then(res => res.json())
-      .then(data => console.log(data[0]))
-  }, [finalWord])
-
   const moveLetterDownOnBackspace = () => {
     const newCharStates = [...charStates]
     const topRow = charStates.filter(charObj => charObj.positionY === 0).sort((a, b) => a.positionX - b.positionX)
