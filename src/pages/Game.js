@@ -47,6 +47,12 @@ export default function Game() {
     if (words.includes(finalWord)) {
       setCorrectWord(true)
     } else { setCorrectWord(false) }
+
+    return () => {
+      if (words.includes(finalWord)) {
+        setCorrectWord(true)
+      } else { setCorrectWord(false) }
+    }
   }, [finalWord])
 
   const moveLetterDownOnBackspace = () => {
