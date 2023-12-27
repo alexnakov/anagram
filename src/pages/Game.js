@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { useState } from 'react'
 import BoardSVG from '../components/BoardSVG.js'
 import MoveableLetter from '../components/MoveableLetter.js'
+import { words } from '../words.js'
 
 const generateNRandomLetters = n => {
   /**
