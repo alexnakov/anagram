@@ -39,7 +39,12 @@ const arrayOfMapsFromChars = createArrayOfMapsfromChars(nineRandomLetters)
 export default function Game() {
   const [finalWord, setFinalWord] = useState('')
   const [charStates, setCharStates] = useState(arrayOfMapsFromChars)
+  const [correctWord, setCorrectWord] = useState(false)
   const inputElement = useRef()
+
+  useEffect(() => {
+
+  }, [finalWord])
 
   const moveLetterDownOnBackspace = () => {
     const newCharStates = [...charStates]
