@@ -44,7 +44,9 @@ export default function Game() {
   const inputElement = useRef()
 
   useEffect(() => {
-
+    if (words.includes(finalWord)) {
+      setCorrectWord(true)
+    } else { setCorrectWord(false) }
   }, [finalWord])
 
   const moveLetterDownOnBackspace = () => {
@@ -118,6 +120,7 @@ export default function Game() {
             />
         )})}
       </div>
+      <p style={{position: 'absolute', 'bottom': '30px'}}>{correctWord ? "Correct ✅" : "Incorrect ❌"}</p>
     </div>
   )
 }
