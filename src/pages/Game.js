@@ -111,8 +111,9 @@ export default function Game() {
           <div className='player-card right'></div>
         </div>
         <h2>Find the longest word!!!</h2>
+
         <input ref={inputElement} autoFocus onKeyUp={e => handleKeyPresses(e)} style={{border: '1px solid red', height: '100px', position: 'absolute', outline: 'none', caretColor: 'transparent', color: '#000', opacity: 0.5, top: '100px', display: 'block'}} />
-        <div style={{border: '1px solid red', width: '440px', height: '140px', position: 'relative'}}>
+        <div className='board' style={{border: '1px solid red', width: '440px', height: '140px', position: 'relative'}}>
           <BoardSVG />
 
           {charStates.map(obj => {
@@ -122,6 +123,9 @@ export default function Game() {
               inputElement={inputElement} setFinalWord={setFinalWord}
               />
           )})}
+        </div>
+        <div className='done-btn-container'>
+          <button>I'm Done</button>
         </div>
       </div>
     </div>
