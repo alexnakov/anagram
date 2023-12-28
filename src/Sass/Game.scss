@@ -1,9 +1,92 @@
 .game-page-bg {
   background-color: black;
+  position: relative;
 
-  .game-stage-bg {
+  .input-func-box {
+    position: absolute;
+    width: 50px;
+    height: 100vh;
+    border: 2px dashed pink;
+    height: 25px;
+    outline: none;
+    caret-color: transparent;
+    color: "#000";
+    opacity: 0;
+    top: 0;
+    left: 0;
+  }
+
+  .game-stage-container {
     width: 700px;
+    height: 100vh;
+    margin: auto;
 
-    background-color: red;
+    background-color: rgb(120, 54, 54) !important;
+    z-index: -3;
+  
+    h1, h2 {
+      text-align: center;
+      color: white;
+      padding-top: 20px;
+    }
+  
+    .player-clock-container {
+      width: 700px;
+      height: 200px;
+  
+      border: 1px solid yellow;
+  
+      display: flex;
+      justify-content: space-between;
+    
+      .player-card {
+        width: 175px;
+        border: 1px solid orangered;
+      }
+    
+      .clock-banner {
+        width: 225px;
+        border: 1px solid orange;
+      }
+    }
+
+    .board-btns-flex-container {
+      display: flex;
+      justify-content: space-evenly;
+    
+      .black-btns-container {
+        width: 150px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .btn-wrapper {
+          height: 40px;
+          line-height: 40px;
+          background-color: black;
+          color: white;
+          text-align: center;
+          font-size: x-large;
+
+          border: 1px solid white;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .done-btn-container {
+      width: 200px;
+      margin: auto;
+      margin-top: 60px;
+
+      button {
+        width: 200px;
+        height: 50px;
+        line-height: 50px;
+        font-size: x-large;
+        background-color: orange;
+      }
+    }
   }
 }

@@ -24,7 +24,7 @@ const createArrayOfMapsfromChars = charArray => {
 
   for (let i = 0; i < charArray.length; i++) {
     arrayOfMaps.push({
-      id: i, char: charArray[i], positionX: 70*i, positionY: 100, 
+      id: i, char: charArray[i], positionX: 50*i, positionY: 80, 
     })
   }
 
@@ -43,17 +43,23 @@ export default function Game() {
   const [charStates, setCharStates] = useState(arrayOfMapsFromChars)
   const inputElement = useRef()
 
+  useEffect(() => {
+    inputElement.current.focus()
+
+    return () => { inputElement.current.focus() }
+  }, [])
+
   const moveLetterDownOnBackspace = () => {
     const newCharStates = [...charStates]
     const topRow = charStates.filter(charObj => charObj.positionY === 0).sort((a, b) => a.positionX - b.positionX)
     if (topRow.length !== 0) {
       const charObjToMove = topRow[topRow.length - 1] // Top row with highest X coord
       for (let i = 0; i < 9; i++) {
-        if (!doesLetterOccupyTheseCoords(charStates, i*70, 100)) {
+        if (!doesLetterOccupyTheseCoords(charStates, i*50, 80)) {
           // Checks whether letter occupies X coords at the bottom row
 
-          charObjToMove.positionX = 70*i // the un-occupied position now becomes line 56's position
-          charObjToMove.positionY = 100
+          charObjToMove.positionX = 50*i // the un-occupied position now becomes line 56's position
+          charObjToMove.positionY = 80
           newCharStates[charObjToMove.id] = charObjToMove
           setCharStates(newCharStates)
           return;
@@ -65,10 +71,10 @@ export default function Game() {
 
   const moveLetterUpOnKeyPress = (keyPressed) => {
     const charStatesDuplicateSorted = [...charStates].sort((a,b) => a.positionX - b.positionX)
-    const lowestBottomRowLetterDuplicate = charStatesDuplicateSorted.find(charObj => charObj.positionY === 100 && charObj.char === keyPressed)
+    const lowestBottomRowLetterDuplicate = charStatesDuplicateSorted.find(charObj => charObj.positionY === 80 && charObj.char === keyPressed)
     if (lowestBottomRowLetterDuplicate == undefined) { return; }
     const topRowLength = charStates.filter(charObj => charObj.positionY === 0).length
-    const newXCoord = topRowLength * 70
+    const newXCoord = topRowLength * 50
     lowestBottomRowLetterDuplicate.positionX = newXCoord
     lowestBottomRowLetterDuplicate.positionY = 0
     const newCharStates = [...charStates]
@@ -102,30 +108,41 @@ export default function Game() {
   }
 
   return (
-    <div onClick={() => inputElement.current.focus()} className='game-page-bg' style={{width: '100vw', height: '100vh', display: 'grid', placeItems: 'center'}}>
-      <div className='black-border-bg left'>
+    <div className='game-page-bg'>
+      <input className='input-func-box' ref={inputElement} autoFocus onKeyUp={e => handleKeyPresses(e)} />
+      <div className='game-stage-container'>
+        <h1>Anagram Magic</h1>
+        <div className='player-clock-container'>
+          <div className='player-card left'></div>
+          <div className='clock-banner'></div>
+          <div className='player-card right'></div>
+        </div>
 
-      </div>
-      <div className='game-stage-bg'>
-        
-      </div> 
-      <div className='black-border-bg right'>
-        
-      </div>
+        <div style={{display: 'flex', margin: '25px 0', height: '45px', alignItems: 'center', justifyContent: 'space-around'}}>
+          <h2>Find the longest word!!!</h2>
+        </div>
       
-      
-      
-      <input ref={inputElement} autoFocus onKeyUp={e => handleKeyPresses(e)} style={{border: '1px solid red', height: '100px', position: 'absolute', outline: 'none', caretColor: 'transparent', color: '#000', opacity: 0.5, top: '100px', display: 'block'}} />
-      <div style={{border: '1px solid red', width: '610px', height: '150px', position: 'relative'}}>
-        <BoardSVG />
+        <div className='board-btns-flex-container'>
+          <div className='board' style={{border: '1px solid red', width: '440px', height: '120px', position: 'relative'}}>
+            <BoardSVG />
 
-        {charStates.map(obj => {
-          return (<MoveableLetter key={obj.id} id={obj.id} 
-            positionX={obj.positionX} positionY={obj.positionY} character={obj.char} 
-            charStates={charStates}  setCharStates={setCharStates}
-            inputElement={inputElement} setFinalWord={setFinalWord}
-            />
-        )})}
+            {charStates.map(obj => {
+              return (<MoveableLetter key={obj.id} id={obj.id} 
+                positionX={obj.positionX} positionY={obj.positionY} character={obj.char} 
+                charStates={charStates}  setCharStates={setCharStates}
+                inputElement={inputElement} setFinalWord={setFinalWord}
+                />
+            )})}
+          </div>
+          <div className='black-btns-container'>
+            {finalWord.length > 0 ? <div className='btn-wrapper'>Backspace</div> : <div style={{width: '150px', height: '40px'}}></div>}
+            <div className='btn-wrapper'>Shuffle</div>
+          </div>
+        </div>
+
+        <div className='done-btn-container'>
+          <button>I'm Done</button>
+        </div>
       </div>
     </div>
   )
