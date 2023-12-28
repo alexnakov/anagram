@@ -22,7 +22,7 @@ export default function MoveableLetter(props) {
   };
 
   const moveLetterUpOnSelfClickUp = () => {
-    if (props.positionY === 100) { // If this fails, the letter clicked is not in the bottom row
+    if (props.positionY === 80) { // If this fails, the letter clicked is not in the bottom row
       const topRow = props.charStates.filter(obj => obj.positionY === 0)
       const newXCoord = topRow.length * 50
       const newCharStates = [...props.charStates]

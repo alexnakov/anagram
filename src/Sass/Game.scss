@@ -1,5 +1,20 @@
 .game-page-bg {
   background-color: black;
+  position: relative;
+
+  .input-func-box {
+    position: absolute;
+    width: 50px;
+    height: 100vh;
+    border: 2px dashed pink;
+    height: 25px;
+    outline: none;
+    caret-color: transparent;
+    color: "#000";
+    opacity: 0;
+    top: 0;
+    left: 0;
+  }
 
   .game-stage-container {
     width: 700px;
@@ -26,21 +41,13 @@
     
       .player-card {
         width: 175px;
+        border: 1px solid orangered;
       }
     
       .clock-banner {
         width: 225px;
+        border: 1px solid orange;
       }
-    }
-
-    .input-func-box {
-      border: 2px dashed pink;
-      height: 25px;
-      outline: none;
-      caret-color: transparent;
-      color: "#000";
-      opacity: 0.4;
-      display: inline-block;
     }
 
     .board-btns-flex-container {

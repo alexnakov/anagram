@@ -24,7 +24,7 @@ const createArrayOfMapsfromChars = charArray => {
 
   for (let i = 0; i < charArray.length; i++) {
     arrayOfMaps.push({
-      id: i, char: charArray[i], positionX: 50*i, positionY: 100, 
+      id: i, char: charArray[i], positionX: 50*i, positionY: 80, 
     })
   }
 
@@ -43,17 +43,23 @@ export default function Game() {
   const [charStates, setCharStates] = useState(arrayOfMapsFromChars)
   const inputElement = useRef()
 
+  useEffect(() => {
+    inputElement.current.focus()
+
+    return () => { inputElement.current.focus() }
+  }, [])
+
   const moveLetterDownOnBackspace = () => {
     const newCharStates = [...charStates]
     const topRow = charStates.filter(charObj => charObj.positionY === 0).sort((a, b) => a.positionX - b.positionX)
     if (topRow.length !== 0) {
       const charObjToMove = topRow[topRow.length - 1] // Top row with highest X coord
       for (let i = 0; i < 9; i++) {
-        if (!doesLetterOccupyTheseCoords(charStates, i*50, 100)) {
+        if (!doesLetterOccupyTheseCoords(charStates, i*50, 80)) {
           // Checks whether letter occupies X coords at the bottom row
 
           charObjToMove.positionX = 50*i // the un-occupied position now becomes line 56's position
-          charObjToMove.positionY = 100
+          charObjToMove.positionY = 80
           newCharStates[charObjToMove.id] = charObjToMove
           setCharStates(newCharStates)
           return;
@@ -65,7 +71,7 @@ export default function Game() {
 
   const moveLetterUpOnKeyPress = (keyPressed) => {
     const charStatesDuplicateSorted = [...charStates].sort((a,b) => a.positionX - b.positionX)
-    const lowestBottomRowLetterDuplicate = charStatesDuplicateSorted.find(charObj => charObj.positionY === 100 && charObj.char === keyPressed)
+    const lowestBottomRowLetterDuplicate = charStatesDuplicateSorted.find(charObj => charObj.positionY === 80 && charObj.char === keyPressed)
     if (lowestBottomRowLetterDuplicate == undefined) { return; }
     const topRowLength = charStates.filter(charObj => charObj.positionY === 0).length
     const newXCoord = topRowLength * 50
@@ -102,7 +108,8 @@ export default function Game() {
   }
 
   return (
-    <div onClick={() => inputElement.current.focus()} className='game-page-bg'>
+    <div className='game-page-bg'>
+      <input className='input-func-box' ref={inputElement} autoFocus onKeyUp={e => handleKeyPresses(e)} />
       <div className='game-stage-container'>
         <h1>Anagram Magic</h1>
         <div className='player-clock-container'>
@@ -113,11 +120,10 @@ export default function Game() {
 
         <div style={{display: 'flex', margin: '25px 0', height: '45px', alignItems: 'center', justifyContent: 'space-around'}}>
           <h2>Find the longest word!!!</h2>
-          <input className='input-func-box' ref={inputElement} autoFocus onKeyUp={e => handleKeyPresses(e)} />
         </div>
       
         <div className='board-btns-flex-container'>
-          <div className='board' style={{border: '1px solid red', width: '440px', height: '140px', position: 'relative'}}>
+          <div className='board' style={{border: '1px solid red', width: '440px', height: '120px', position: 'relative'}}>
             <BoardSVG />
 
             {charStates.map(obj => {
