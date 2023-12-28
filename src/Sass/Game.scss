@@ -23,31 +23,62 @@
   
       display: flex;
       justify-content: space-between;
-    }
-  
-    // For testing purposes
-    .player-clock-container > * { 
-      border: 1px solid green;
-    }
-  
-    .player-card {
-      width: 175px;
-    }
-  
-    .clock-banner {
-      width: 225px;
+    
+      .player-card {
+        width: 175px;
+      }
+    
+      .clock-banner {
+        width: 225px;
+      }
     }
 
-    .board {
-      margin-left: 50px;
+    .input-func-box {
+      border: 2px dashed pink;
+      height: 25px;
+      outline: none;
+      caret-color: transparent;
+      color: "#000";
+      opacity: 0.4;
+      display: inline-block;
+    }
+
+    .board-btns-flex-container {
+      display: flex;
+      justify-content: space-evenly;
+    
+      .black-btns-container {
+        width: 150px;
+        border: 1px solid maroon;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .btn-wrapper {
+          height: 40px;
+          line-height: 40px;
+          background-color: orange;
+          text-align: center;
+          font-size: x-large;
+
+          border: 1px solid white;
+        }
+      }
     }
 
     .done-btn-container {
       width: 200px;
-
       margin: auto;
       margin-top: 60px;
-      background-color: orange;
+
+      button {
+        width: 200px;
+        height: 50px;
+        line-height: 50px;
+        font-size: x-large;
+        background-color: orange;
+      }
     }
   }
 }

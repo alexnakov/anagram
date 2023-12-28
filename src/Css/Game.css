@@ -20,21 +20,49 @@
   display: flex;
   justify-content: space-between;
 }
-.game-page-bg .game-stage-container .player-clock-container > * {
-  border: 1px solid green;
-}
-.game-page-bg .game-stage-container .player-card {
+.game-page-bg .game-stage-container .player-clock-container .player-card {
   width: 175px;
 }
-.game-page-bg .game-stage-container .clock-banner {
+.game-page-bg .game-stage-container .player-clock-container .clock-banner {
   width: 225px;
 }
-.game-page-bg .game-stage-container .board {
-  margin-left: 50px;
+.game-page-bg .game-stage-container .input-func-box {
+  border: 2px dashed pink;
+  height: 25px;
+  outline: none;
+  caret-color: transparent;
+  color: "#000";
+  opacity: 0.4;
+  display: inline-block;
+}
+.game-page-bg .game-stage-container .board-btns-flex-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+.game-page-bg .game-stage-container .board-btns-flex-container .black-btns-container {
+  width: 150px;
+  border: 1px solid maroon;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.game-page-bg .game-stage-container .board-btns-flex-container .black-btns-container .btn-wrapper {
+  height: 40px;
+  line-height: 40px;
+  background-color: orange;
+  text-align: center;
+  font-size: x-large;
+  border: 1px solid white;
 }
 .game-page-bg .game-stage-container .done-btn-container {
   width: 200px;
   margin: auto;
   margin-top: 60px;
+}
+.game-page-bg .game-stage-container .done-btn-container button {
+  width: 200px;
+  height: 50px;
+  line-height: 50px;
+  font-size: x-large;
   background-color: orange;
 }

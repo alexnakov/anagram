@@ -110,20 +110,30 @@ export default function Game() {
           <div className='clock-banner'></div>
           <div className='player-card right'></div>
         </div>
-        <h2>Find the longest word!!!</h2>
 
-        <input ref={inputElement} autoFocus onKeyUp={e => handleKeyPresses(e)} style={{border: '1px solid red', height: '100px', position: 'absolute', outline: 'none', caretColor: 'transparent', color: '#000', opacity: 0.5, top: '100px', display: 'block'}} />
-        <div className='board' style={{border: '1px solid red', width: '440px', height: '140px', position: 'relative'}}>
-          <BoardSVG />
-
-          {charStates.map(obj => {
-            return (<MoveableLetter key={obj.id} id={obj.id} 
-              positionX={obj.positionX} positionY={obj.positionY} character={obj.char} 
-              charStates={charStates}  setCharStates={setCharStates}
-              inputElement={inputElement} setFinalWord={setFinalWord}
-              />
-          )})}
+        <div style={{display: 'flex', margin: '25px 0', height: '45px', alignItems: 'center', justifyContent: 'space-around'}}>
+          <h2>Find the longest word!!!</h2>
+          <input className='input-func-box' ref={inputElement} autoFocus onKeyUp={e => handleKeyPresses(e)} />
         </div>
+      
+        <div className='board-btns-flex-container'>
+          <div className='board' style={{border: '1px solid red', width: '440px', height: '140px', position: 'relative'}}>
+            <BoardSVG />
+
+            {charStates.map(obj => {
+              return (<MoveableLetter key={obj.id} id={obj.id} 
+                positionX={obj.positionX} positionY={obj.positionY} character={obj.char} 
+                charStates={charStates}  setCharStates={setCharStates}
+                inputElement={inputElement} setFinalWord={setFinalWord}
+                />
+            )})}
+          </div>
+          <div className='black-btns-container'>
+            <div className='btn-wrapper'>Backspace</div>
+            <div className='btn-wrapper'>Shuffle</div>
+          </div>
+        </div>
+
         <div className='done-btn-container'>
           <button>I'm Done</button>
         </div>
