@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from 'react'
 import { useState } from 'react'
 import BoardSVG from '../components/BoardSVG.js'
 import MoveableLetter from '../components/MoveableLetter.js'
+import { words } from '../words.js' // File w correct answers
+import '../Css/Game.css'
 
 const generateNRandomLetters = n => {
   /**
@@ -58,6 +60,7 @@ export default function Game() {
         }
       }
     }
+  
   }
 
   const moveLetterUpOnKeyPress = (keyPressed) => {
@@ -99,7 +102,13 @@ export default function Game() {
   }
 
   return (
-    <div onClick={() => inputElement.current.focus()} style={{width: '100vw', height: '100vh', display: 'grid', placeItems: 'center'}}>
+    <div onClick={() => inputElement.current.focus()} className='game-page-bg' style={{width: '100vw', height: '100vh', display: 'grid', placeItems: 'center'}}>
+      <div className='black-border-bg left'></div>
+      <div className='game-stage-bg'></div> 
+      <div className='black-border-bg right'></div>
+      
+      
+      
       <input ref={inputElement} autoFocus onKeyUp={e => handleKeyPresses(e)} style={{border: '1px solid red', height: '100px', position: 'absolute', outline: 'none', caretColor: 'transparent', color: '#000', opacity: 0.5, top: '100px', display: 'block'}} />
       <div style={{border: '1px solid red', width: '610px', height: '150px', position: 'relative'}}>
         <BoardSVG />

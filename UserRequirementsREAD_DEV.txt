@@ -1,6 +1,1 @@
-NOTE: Leave design and figures to last. Focus on functionality.
-
-Next Steps:
-
-- Learn how to check whether a word works or not, using a db or api
-
+Make the design during gametime look more like anagram magic
