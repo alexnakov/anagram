@@ -3,7 +3,7 @@ import { motion, spring } from 'framer-motion'
 
 export default function MoveableLetter(props) {
   const styles = {
-    width: '50px', height: '50px', 
+    width: '40px', height: '40px', 
     backgroundColor: 'red', 
     position: 'absolute',
     textAlign: 'center',
@@ -24,7 +24,7 @@ export default function MoveableLetter(props) {
   const moveLetterUpOnSelfClickUp = () => {
     if (props.positionY === 100) { // If this fails, the letter clicked is not in the bottom row
       const topRow = props.charStates.filter(obj => obj.positionY === 0)
-      const newXCoord = topRow.length * 70
+      const newXCoord = topRow.length * 50
       const newCharStates = [...props.charStates]
       newCharStates[props.id].positionX = newXCoord
       newCharStates[props.id].positionY = 0

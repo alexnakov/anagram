@@ -24,7 +24,7 @@ const createArrayOfMapsfromChars = charArray => {
 
   for (let i = 0; i < charArray.length; i++) {
     arrayOfMaps.push({
-      id: i, char: charArray[i], positionX: 70*i, positionY: 100, 
+      id: i, char: charArray[i], positionX: 50*i, positionY: 100, 
     })
   }
 
@@ -49,10 +49,10 @@ export default function Game() {
     if (topRow.length !== 0) {
       const charObjToMove = topRow[topRow.length - 1] // Top row with highest X coord
       for (let i = 0; i < 9; i++) {
-        if (!doesLetterOccupyTheseCoords(charStates, i*70, 100)) {
+        if (!doesLetterOccupyTheseCoords(charStates, i*50, 100)) {
           // Checks whether letter occupies X coords at the bottom row
 
-          charObjToMove.positionX = 70*i // the un-occupied position now becomes line 56's position
+          charObjToMove.positionX = 50*i // the un-occupied position now becomes line 56's position
           charObjToMove.positionY = 100
           newCharStates[charObjToMove.id] = charObjToMove
           setCharStates(newCharStates)
@@ -68,7 +68,7 @@ export default function Game() {
     const lowestBottomRowLetterDuplicate = charStatesDuplicateSorted.find(charObj => charObj.positionY === 100 && charObj.char === keyPressed)
     if (lowestBottomRowLetterDuplicate == undefined) { return; }
     const topRowLength = charStates.filter(charObj => charObj.positionY === 0).length
-    const newXCoord = topRowLength * 70
+    const newXCoord = topRowLength * 50
     lowestBottomRowLetterDuplicate.positionX = newXCoord
     lowestBottomRowLetterDuplicate.positionY = 0
     const newCharStates = [...charStates]
@@ -102,30 +102,27 @@ export default function Game() {
   }
 
   return (
-    <div onClick={() => inputElement.current.focus()} className='game-page-bg' style={{width: '100vw', height: '100vh', display: 'grid', placeItems: 'center'}}>
-      <div className='black-border-bg left'>
+    <div onClick={() => inputElement.current.focus()} className='game-page-bg'>
+      <div className='game-stage-container'>
+        <h1>Anagram Magic</h1>
+        <div className='player-clock-container'>
+          <div className='player-card left'></div>
+          <div className='clock-banner'></div>
+          <div className='player-card right'></div>
+        </div>
+        <h2>Find the longest word!!!</h2>
+        <input ref={inputElement} autoFocus onKeyUp={e => handleKeyPresses(e)} style={{border: '1px solid red', height: '100px', position: 'absolute', outline: 'none', caretColor: 'transparent', color: '#000', opacity: 0.5, top: '100px', display: 'block'}} />
+        <div style={{border: '1px solid red', width: '440px', height: '140px', position: 'relative'}}>
+          <BoardSVG />
 
-      </div>
-      <div className='game-stage-bg'>
-        
-      </div> 
-      <div className='black-border-bg right'>
-        
-      </div>
-      
-      
-      
-      <input ref={inputElement} autoFocus onKeyUp={e => handleKeyPresses(e)} style={{border: '1px solid red', height: '100px', position: 'absolute', outline: 'none', caretColor: 'transparent', color: '#000', opacity: 0.5, top: '100px', display: 'block'}} />
-      <div style={{border: '1px solid red', width: '610px', height: '150px', position: 'relative'}}>
-        <BoardSVG />
-
-        {charStates.map(obj => {
-          return (<MoveableLetter key={obj.id} id={obj.id} 
-            positionX={obj.positionX} positionY={obj.positionY} character={obj.char} 
-            charStates={charStates}  setCharStates={setCharStates}
-            inputElement={inputElement} setFinalWord={setFinalWord}
-            />
-        )})}
+          {charStates.map(obj => {
+            return (<MoveableLetter key={obj.id} id={obj.id} 
+              positionX={obj.positionX} positionY={obj.positionY} character={obj.char} 
+              charStates={charStates}  setCharStates={setCharStates}
+              inputElement={inputElement} setFinalWord={setFinalWord}
+              />
+          )})}
+        </div>
       </div>
     </div>
   )
