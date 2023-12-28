@@ -103,9 +103,15 @@ export default function Game() {
 
   return (
     <div onClick={() => inputElement.current.focus()} className='game-page-bg' style={{width: '100vw', height: '100vh', display: 'grid', placeItems: 'center'}}>
-      <div className='black-border-bg left'></div>
-      <div className='game-stage-bg'></div> 
-      <div className='black-border-bg right'></div>
+      <div className='black-border-bg left'>
+
+      </div>
+      <div className='game-stage-bg'>
+        
+      </div> 
+      <div className='black-border-bg right'>
+        
+      </div>
       
       
       
