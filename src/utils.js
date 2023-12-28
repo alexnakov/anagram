@@ -46,10 +46,7 @@ const sampleData = [
   { id: 8, char: 'p', positionX: 560, positionY: 100, canMoveUp: false, canMoveDown: false }
 ]
 
-const arr1 = generateNRandomLetters(9)
-const data = createArrayOfMapsfromChars(arr1)
-console.log(data)
-
+console.log(sampleData.find(charObj => charObj.positionY === 100) === undefined)
 
 
 

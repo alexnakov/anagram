@@ -135,7 +135,7 @@ export default function Game() {
             )})}
           </div>
           <div className='black-btns-container'>
-            <div className='btn-wrapper'>Backspace</div>
+            {finalWord.length > 0 ? <div className='btn-wrapper'>Backspace</div> : <div style={{width: '150px', height: '40px'}}></div>}
             <div className='btn-wrapper'>Shuffle</div>
           </div>
         </div>

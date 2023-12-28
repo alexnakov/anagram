@@ -56,7 +56,6 @@
     
       .black-btns-container {
         width: 150px;
-        border: 1px solid maroon;
 
         display: flex;
         flex-direction: column;
@@ -65,11 +64,13 @@
         .btn-wrapper {
           height: 40px;
           line-height: 40px;
-          background-color: orange;
+          background-color: black;
+          color: white;
           text-align: center;
           font-size: x-large;
 
           border: 1px solid white;
+          cursor: pointer;
         }
       }
     }

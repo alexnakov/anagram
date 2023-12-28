@@ -48,7 +48,6 @@
 }
 .game-page-bg .game-stage-container .board-btns-flex-container .black-btns-container {
   width: 150px;
-  border: 1px solid maroon;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -56,10 +55,12 @@
 .game-page-bg .game-stage-container .board-btns-flex-container .black-btns-container .btn-wrapper {
   height: 40px;
   line-height: 40px;
-  background-color: orange;
+  background-color: black;
+  color: white;
   text-align: center;
   font-size: x-large;
   border: 1px solid white;
+  cursor: pointer;
 }
 .game-page-bg .game-stage-container .done-btn-container {
   width: 200px;
