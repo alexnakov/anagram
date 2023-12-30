@@ -35,6 +35,14 @@ const doesLetterOccupyTheseCoords = (arrCharObjects, x, y) => {
   return arrCharObjects.some(charObj => charObj.positionX === x && charObj.positionY === y)
 }
 
+function popRandomElement(arr) {
+  if (arr.length === 0) { return null; }
+
+  const randomIndex = Math.floor(Math.random() * arr.length);
+  const poppedElement = arr.splice(randomIndex, 1)[0];
+  return poppedElement;
+}
+
 const nineRandomLetters = generateNRandomLetters(9)
 const arrayOfMapsFromChars = createArrayOfMapsfromChars(nineRandomLetters)
 
@@ -107,6 +115,23 @@ export default function Game() {
     updateFinalWord()
   }
 
+  const handleShuffleBtn = () => {
+    const topRow = charStates.filter(charObj => charObj.positionY === 0)
+    const bottomRow = charStates.filter(charObj => charObj.positionY === 80)
+    if (bottomRow.length === 0) { return; }
+    const xCoords = []
+    for (let i = 0; i < bottomRow.length; i++) {
+      xCoords.push(bottomRow[i].positionX)
+    }
+    for (let i = 0; i < bottomRow.length; i++) {
+      bottomRow[i].positionX = popRandomElement(xCoords)
+    }
+
+    const combinedRows = [...topRow, ...bottomRow].sort((a,b) => a.id - b.id)
+    setCharStates(combinedRows)
+    inputElement.current.focus()
+  }
+
   return (
     <div className='game-page-bg'>
       <input className='input-func-box' ref={inputElement} autoFocus onKeyUp={e => handleKeyPresses(e)} />
@@ -141,7 +166,7 @@ export default function Game() {
                   : 
                 <div style={{width: '150px', height: '40px'}}></div>
             }
-            <div className='btn-wrapper'>Shuffle</div>
+            <div onClick={() => handleShuffleBtn()} className='btn-wrapper'>Shuffle</div>
           </div>
         </div>
 
