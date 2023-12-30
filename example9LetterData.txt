@@ -1,11 +1,11 @@
 [
-  { id: 0, char: 'v', positionX: 0, positionY: 100 },
-  { id: 1, char: 'x', positionX: 70, positionY: 100 },
-  { id: 2, char: 'w', positionX: 140, positionY: 100 },
-  { id: 3, char: 'k', positionX: 210, positionY: 100 },
-  { id: 4, char: 'p', positionX: 280, positionY: 100 },
-  { id: 5, char: 'b', positionX: 350, positionY: 100 },
-  { id: 6, char: 'z', positionX: 420, positionY: 100 },
-  { id: 7, char: 'n', positionX: 490, positionY: 100 },
-  { id: 8, char: 'p', positionX: 560, positionY: 100 }
+  { id: 0, char: 'v', positionX: 0, positionY: 80 },
+  { id: 1, char: 'x', positionX: 50, positionY: 80 },
+  { id: 2, char: 'w', positionX: 100, positionY: 80 },
+  { id: 3, char: 'k', positionX: 150, positionY: 80 },
+  { id: 4, char: 'p', positionX: 200, positionY: 80 },
+  { id: 5, char: 'b', positionX: 250, positionY: 80 },
+  { id: 6, char: 'z', positionX: 300, positionY: 80 },
+  { id: 7, char: 'n', positionX: 350, positionY: 80 },
+  { id: 8, char: 'p', positionX: 400, positionY: 80 }
 ]
