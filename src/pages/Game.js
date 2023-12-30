@@ -133,7 +133,7 @@ export default function Game() {
   }
 
   return (
-    <div className='game-page-bg'>
+    <div onClick={() => inputElement.current.focus()} className='game-page-bg'>
       <input className='input-func-box' ref={inputElement} autoFocus onKeyUp={e => handleKeyPresses(e)} />
       <div className='game-stage-container'>
         <h1>Anagram Magic</h1>
